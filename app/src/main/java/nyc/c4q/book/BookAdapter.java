@@ -2,6 +2,7 @@ package nyc.c4q.book;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,11 +55,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
         }
 
 
-        if(holder.chartBox.isChecked()){
-
-        }
-
-
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +69,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
             }
         });
 
+        holder.setBooks(book);
+
     }
 
     @Override
@@ -85,8 +83,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
         TextView name, series, sequence, author, genre, price;
         CheckBox box, chartBox;
         Button button;
+        Book book;
 
-        public BookHolder(View itemView) {
+        public void setBooks(Book book){
+            this.book = book;
+        }
+
+        public BookHolder(final View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             series = (TextView) itemView.findViewById(R.id.series);
@@ -95,9 +98,24 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
             genre = (TextView) itemView.findViewById(R.id.genre);
             price = (TextView) itemView.findViewById(R.id.price);
             box = (CheckBox) itemView.findViewById(R.id.box);
-            chartBox = (CheckBox) itemView.findViewById(R.id.cartBox);
 
             button = (Button) itemView.findViewById(R.id.button);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(itemView.getContext(), DisplayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name" , book.getName());
+                    bundle.putString("series", book.getSeries_t());
+                    bundle.putString("sequence", book.getSeries_t());
+                    bundle.putString("author", book.getSeries_t());
+                    bundle.putString("genre", book.getSeries_t());
+                    bundle.putString("price", book.getSeries_t());
+                    intent.putExtras(bundle);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
