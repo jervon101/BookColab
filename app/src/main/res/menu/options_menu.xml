@@ -2,13 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:icon="@drawable/ic_serach_icon"
         android:id="@+id/search"
-        android:title="About"
-        app:showAsAction="always"/>
+        android:title="Search"
+        app:showAsAction="always|withText"/>
     <item
+        android:icon="@drawable/ic_cart_icon"
         android:id="@+id/cart"
         android:title="Cart"
-        app:showAsAction="always"/>
+        app:showAsAction="always|withText"/>
     <item
         android:id="@+id/help"
         android:title="Help"
