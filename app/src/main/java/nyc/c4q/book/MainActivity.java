@@ -30,8 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.cycle);
         recyclerView.setLayoutManager(manager);
+        RetroSetup();
 
 
+    }
+
+
+
+    public void  RetroSetup(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
