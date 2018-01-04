@@ -30,11 +30,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     List<Book> books;
     Book book;
     private SharedPreferences log;
+    Button button2;
 
 
     public BookAdapter(List<Book> books, SharedPreferences log) {
         this.books = books;
-        this.log =log;
+        this.log = log;
+    }
+
+    public BookAdapter(List<Book> cart) {
+        this.books = cart;
+
     }
 
     @Override
@@ -46,7 +52,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
 
     @Override
     public void onBindViewHolder(final BookHolder holder, int position) {
-
 
 
         book = books.get(position);
@@ -91,13 +96,26 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
                 SharedPreferences.Editor editor = log.edit();
 
 //                if (log.contains(book.getName())) {
-                    Gson gson = new Gson();
-                    String json = gson.toJson(book);
-                    editor.putString(book.getName(), json);
-                    editor.commit();
+                Gson gson = new Gson();
+                String json = gson.toJson(book);
+                editor.putString(book.getName(), json);
+                editor.commit();
 //                }
             }
         });
+
+
+
+        holder.cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = log.edit();
+                editor.remove(book.getName());
+                editor.commit();
+                notifyDataSetChanged();
+            }
+        });
+
 
         holder.setBooks(book);
 
@@ -112,10 +130,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
 
         TextView name, series, sequence, author, genre, price;
         CheckBox box, chartBox;
-        Button button;
+        Button button, cartButton;
         Book book;
 
-        public void setBooks(Book book){
+        public void setBooks(Book book) {
             this.book = book;
         }
 
@@ -128,14 +146,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
             genre = (TextView) itemView.findViewById(R.id.genre);
             price = (TextView) itemView.findViewById(R.id.price);
             box = (CheckBox) itemView.findViewById(R.id.box);
+
             button = (Button) itemView.findViewById(R.id.button);
+            cartButton = (Button) itemView.findViewById(R.id.cartbutton);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(itemView.getContext(), DisplayActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("name" , book.getName());
+                    bundle.putString("name", book.getName());
                     bundle.putString("series", book.getSeries_t());
                     bundle.putString("sequence", book.getSeries_t());
                     bundle.putString("author", book.getSeries_t());
