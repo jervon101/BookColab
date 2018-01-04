@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    public static List<Book> cart;
+
 
     private SharedPreferences log;
     private static final String SHARED_PREF_KEY = "book_cart";
@@ -48,20 +48,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         RetroSetup();
 
-        cart = new ArrayList<>();
-
-        Map<String, ?> keys = log.getAll();
-
-        for (Map.Entry<String, ?> entry : keys.entrySet()) {
-            Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
-
-            Gson gson = new Gson();
-            String json = log.getString(entry.getKey(), "");
-            Book obj = gson.fromJson(json, Book.class);
-            cart.add(obj);
-        }
-
-        Log.e("Size", cart.size() + "");
     }
 
     public void RetroSetup() {
@@ -94,15 +80,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.cart:
-                Intent startCartActivity = new Intent(this,);
+                Intent cartActivity = new Intent(this, Cartactivity.class);
+                startActivity(cartActivity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }*/
+    }
 }
