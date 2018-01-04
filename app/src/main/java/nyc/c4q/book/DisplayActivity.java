@@ -20,7 +20,7 @@ public class DisplayActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        String nameString = "Name: " + bundle.getString("name");
+        String nameString = bundle.getString("name");
         String seriesString = "Series: " + bundle.getString("series");
         String sequenceString = "Secquence: " + String.valueOf(bundle.getInt("sequence"));
         String authorString = "Author: " + bundle.getString("author");
