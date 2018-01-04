@@ -53,6 +53,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
             holder.box.setChecked(true);
         }
 
+
+        if(holder.chartBox.isChecked()){
+
+        }
+
+
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +83,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     class BookHolder extends RecyclerView.ViewHolder {
 
         TextView name, series, sequence, author, genre, price;
-        CheckBox box;
+        CheckBox box, chartBox;
         Button button;
 
         public BookHolder(View itemView) {
@@ -89,6 +95,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
             genre = (TextView) itemView.findViewById(R.id.genre);
             price = (TextView) itemView.findViewById(R.id.price);
             box = (CheckBox) itemView.findViewById(R.id.box);
+            chartBox = (CheckBox) itemView.findViewById(R.id.cartBox);
+
             button = (Button) itemView.findViewById(R.id.button);
         }
     }
