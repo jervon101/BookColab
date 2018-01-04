@@ -20,12 +20,20 @@ public class DisplayActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        name.setText(bundle.getString("name"));
-        series.setText(bundle.getString("series"));
-        sequence.setText(bundle.getString("sequence"));
-        author.setText(bundle.getString("author"));
-        genre.setText(bundle.getString("genre"));
-        price.setText(bundle.getString("price"));
+        String nameString = "Name: " + bundle.getString("name");
+        String seriesString = "Series: " + bundle.getString("series");
+        String sequenceString = "Secquence: " + String.valueOf(bundle.getInt("sequence"));
+        String authorString = "Author: " + bundle.getString("author");
+        String genreString = "Genre: " + bundle.getString("genre");
+        String priceString = "Price: " + String.valueOf(bundle.getDouble("price"));
+
+
+        name.setText(nameString);
+        series.setText(seriesString);
+        sequence.setText(sequenceString);
+        author.setText(authorString);
+        genre.setText(genreString);
+        price.setText(priceString);
     }
 
     private void initViews() {

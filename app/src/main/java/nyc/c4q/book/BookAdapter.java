@@ -137,10 +137,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
                     Bundle bundle = new Bundle();
                     bundle.putString("name" , book.getName());
                     bundle.putString("series", book.getSeries_t());
-                    bundle.putString("sequence", book.getSeries_t());
-                    bundle.putString("author", book.getSeries_t());
-                    bundle.putString("genre", book.getSeries_t());
-                    bundle.putString("price", book.getSeries_t());
+                    bundle.putInt("sequence", book.getSequence_i());
+                    bundle.putString("author", book.author);
+                    bundle.putString("genre", book.getGenre_s());
+                    bundle.putDouble("price", book.getPrice());
                     intent.putExtras(bundle);
                     itemView.getContext().startActivity(intent);
                 }
