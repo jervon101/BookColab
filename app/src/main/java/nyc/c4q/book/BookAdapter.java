@@ -1,6 +1,7 @@
 package nyc.c4q.book;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +12,13 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.w3c.dom.Text;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by jervon.arnoldd on 12/18/17.
@@ -23,9 +28,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     View view;
     List<Book> books;
     Book book;
+    private SharedPreferences log;
 
-    public BookAdapter(List<Book> books) {
+
+    public BookAdapter(List<Book> books, SharedPreferences log) {
         this.books = books;
+        this.log =log;
     }
 
     @Override
@@ -36,7 +44,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     }
 
     @Override
-    public void onBindViewHolder(BookHolder holder, int position) {
+    public void onBindViewHolder(final BookHolder holder, int position) {
+
+
+
         book = books.get(position);
 
         holder.box.setClickable(false);
@@ -53,23 +64,40 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
             holder.box.setChecked(true);
         }
 
+//
+//        if (holder.chartBox.isChecked()) {
+//
+//        }
 
-        if(holder.chartBox.isChecked()){
+//
+//        holder.button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    if (!book.getLink().isEmpty()) {
+//                        Intent mServiceIntent = new Intent(view.getContext(), DoStuff.class);
+//                        mServiceIntent.setData(Uri.parse(book.getLink()));
+//                        view.getContext().startService(mServiceIntent);}
+//                } catch (NullPointerException e) {
+//                    Toast.makeText(view.getContext(), "Cant Download,Not link Present", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
-        }
+
 
 
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    if (!book.getLink().isEmpty()) {
-                        Intent mServiceIntent = new Intent(view.getContext(), DoStuff.class);
-                        mServiceIntent.setData(Uri.parse(book.getLink()));
-                        view.getContext().startService(mServiceIntent);}
-                } catch (NullPointerException e) {
-                    Toast.makeText(view.getContext(), "Cant Download,Not link Present", Toast.LENGTH_SHORT).show();
-                }
+                SharedPreferences.Editor editor = log.edit();
+
+//                if (log.contains(book.getName())) {
+                    Gson gson = new Gson();
+                    String json = gson.toJson(book);
+                    editor.putString(book.getName(), json);
+                    editor.commit();
+//                }
             }
         });
 
@@ -95,7 +123,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
             genre = (TextView) itemView.findViewById(R.id.genre);
             price = (TextView) itemView.findViewById(R.id.price);
             box = (CheckBox) itemView.findViewById(R.id.box);
-            chartBox = (CheckBox) itemView.findViewById(R.id.cartBox);
+//            chartBox = (CheckBox) itemView.findViewById(R.id.cartBox);
 
             button = (Button) itemView.findViewById(R.id.button);
         }

@@ -20,9 +20,10 @@
             </intent-filter>
         </activity>
 
-        <!--<service-->
-            <!--&lt;!&ndash;android:name=".DoStuff"&ndash;&gt;-->
-            <!--android:exported="false"/>-->
+        <!-- <service -->
+        <!-- &lt;!&ndash;android:name=".DoStuff"&ndash;&gt; -->
+        <!-- android:exported="false"/> -->
+        <activity android:name=".Cartactivity"></activity>
     </application>
 
 </manifest>
